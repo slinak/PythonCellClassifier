@@ -12,10 +12,12 @@ def convert_csv_to_json(csv_file_path, json_file_path):
     with open(json_file_path, 'w', encoding='ANSI') as jsonfile:
         json.dump(data, jsonfile, indent=4)
 
+#kinda hackish, but format the output filenames and cut off the csv suffix
 def formatTempFileName(inputFileName):
     formattedFileName = 'converted_' + inputFileName[:-3] + '.json'
     return formattedFileName
 
+#check to ensure script invocation contains arguments
 try:
     testCSVFile = sys.argv[1]
     classCSVFile = sys.argv[2]
