@@ -44,6 +44,7 @@ trainedCellClassificationData = json.load(classFile)
 positiveClassifications = {}
 
 #first build positive classification dictionary to make lookups fast AF
+#the value for each kvp is a comma separated string because python can't do more complicated datatypes in dictionaries
 for trainedClassification in trainedCellClassificationData:
     for c in trainedClassification:
         if trainedClassification[c] == '1':
