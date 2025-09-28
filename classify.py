@@ -1,15 +1,15 @@
 import io, json, csv, sys
 from datetime import datetime
 
-#convert csv to json in order to ensure column strict-ness
-def convert_csv_to_json(csv_file_path, json_file_path):
+#convert csv to json in order to ensure column strict-ness and dictionary-speed lookups
+def convertCSVToJson(csvFilePath, jsonFilePath):
     data = []
-    with open(csv_file_path, 'r', newline='', encoding='ANSI') as csvfile:
+    with open(csvFilePath, 'r', newline='', encoding='ANSI') as csvfile:
         csv_reader = csv.DictReader(csvfile)
         for row in csv_reader:
             data.append(row)
 
-    with open(json_file_path, 'w', encoding='ANSI') as jsonfile:
+    with open(jsonFilePath, 'w', encoding='ANSI') as jsonfile:
         json.dump(data, jsonfile, indent=4)
 
 #kinda hackish, but format the output filenames and cut off the csv suffix
@@ -32,8 +32,8 @@ except IndexError:
 testJsonFile = formatTempFileName(testCSVFile)
 classJsonFile = formatTempFileName(classCSVFile)
 
-convert_csv_to_json(testCSVFile, testJsonFile)
-convert_csv_to_json(classCSVFile, classJsonFile)
+convertCSVToJson(testCSVFile, testJsonFile)
+convertCSVToJson(classCSVFile, classJsonFile)
 
 testFile = open(testJsonFile)
 testData = json.load(testFile)
