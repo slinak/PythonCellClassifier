@@ -4,7 +4,7 @@ from datetime import datetime
 #convert csv to json in order to ensure column strict-ness and dictionary-speed lookups
 def convertCSVToJson(csvFilePath, jsonFilePath):
     data = []
-    #there are some greek characters which makes utf-8 not super helpful
+    #there are some greek characters which makes this puke when using utf-8 - ¬µm
     with open(csvFilePath, 'r', newline='', encoding='ANSI') as csvfile:
         csv_reader = csv.DictReader(csvfile)
         for row in csv_reader:
@@ -15,7 +15,7 @@ def convertCSVToJson(csvFilePath, jsonFilePath):
 
 #kinda hackish, but format the output filenames and cut off the csv suffix
 def formatTempFileName(inputFileName):
-    formattedFileName = 'converted_' + inputFileName[:-3] + '.json'
+    formattedFileName = 'converted_' + inputFileName[:-4] + '.json'
     return formattedFileName
 
 #check to ensure script invocation contains arguments
