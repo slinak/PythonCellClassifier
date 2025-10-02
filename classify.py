@@ -4,6 +4,7 @@ from datetime import datetime
 #convert csv to json in order to ensure column strict-ness and dictionary-speed lookups
 def convertCSVToJson(csvFilePath, jsonFilePath):
     data = []
+    #there are some greek characters which makes utf-8 not super helpful
     with open(csvFilePath, 'r', newline='', encoding='ANSI') as csvfile:
         csv_reader = csv.DictReader(csvfile)
         for row in csv_reader:
