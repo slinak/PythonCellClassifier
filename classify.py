@@ -46,20 +46,20 @@ positiveClassifications = {}
 #first build positive classification dictionary to make lookups fast AF
 #the value for each kvp is a comma separated string because python can't do more complicated datatypes in dictionaries
 for trainedClassification in trainedCellClassificationData:
-    for c in trainedClassification:
-        if trainedClassification[c] == '1':
-            if c in positiveClassifications:
-                positiveClassifications[c] += ", " + trainedClassification['Cell Type']
+    for tc in trainedClassification:
+        if trainedClassification[tc] == '1':
+            if tc in positiveClassifications:
+                positiveClassifications[tc] += ", " + trainedClassification['Cell Type']
             else:
-                positiveClassifications[c] = trainedClassification['Cell Type']
+                positiveClassifications[tc] = trainedClassification['Cell Type']
 
 #then iterate over sample data and inject new kvp which is PositiveClassifications v a csv string of its associations
-for test in testData:
-    tmp = test['Classification'].split(':')
+for sample in testData:
+    tmp = sample['Classification'].split(':')
     for t in tmp:
         t = t.strip()
         if t in positiveClassifications:
-            test['PositiveClassifications'] = positiveClassifications[t]
+            sample['PositiveClassifications'] = positiveClassifications[t]
 
 outputFileName = 'classificationOutput-' + datetime.now().strftime('%Y-%m-%d_%H-%M-%S') + '.json'
 
